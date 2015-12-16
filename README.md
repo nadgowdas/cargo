@@ -10,6 +10,7 @@ Cargo system primarily consist of following two components:
 for locally managing the container on the host.
 
 >NOTE: Before deploying this service into production, please perform adequate testing.
+>NOTE: Currently cargo supports migration of data volumes only. Support for 'rootfs' migration is under active development and will be added soon.
 
 
 Installing server:
@@ -23,8 +24,9 @@ Pre-requisites:
 $ pip install Flask flask-restful
 ```
 
-2) etcd 
-Server uses `etcd` for storing the migration metadata. You can either download and install `etcd` on the server or 
+2) etcd
+
+Cargo server uses `etcd` for storing the migration metadata. You can either download and install `etcd` on the server or 
 you can simply instantiate a new etcd container.
 
 3) etcd python client
