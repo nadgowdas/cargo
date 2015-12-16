@@ -1,10 +1,10 @@
 Cargo - Container Migration Solution
 ======================================
-Cargo is a system that we have developed at IBM Research to migrate containers along with their data with minimal downtime. Cargo leverages data federation capabilities of union filesystem to create a unionified view of data (mainly the root file system) across the source and target hosts. This allows Cargo to start up a container almost immediately (within a couple of milliseconds)  on the target host as the data from source root file system gets copied to target hosts either on-demand (using a copy-on-write (COW) partition)  or lazily in the background (using rsync). 
+Cargo is a system that we have developed at IBM Research to migrate containers along with their data with minimal downtime. Cargo leverages data federation capabilities of union filesystem to create a unified view of data (mainly the root file system) across the source and target hosts. This allows Cargo to start up a container almost immediately (within milliseconds)  on the target host as the data from source root file system gets copied to target hosts either on-demand (using a copy-on-write (COW) partition)  or lazily in the background (using rsync). 
 
 Installation
 --------------------------------------
-Cargo system primarily consist of followong two components:
+Cargo system primarily consist of following two components:
 1) server: a centralized authority to orchestrate and manage the migration process. 
 2) agent: it needs to be installed on every docker host in the cluster. Agent is responsible 
 for locally managing the container on the host.
@@ -40,7 +40,6 @@ Starting a server
 
 Download the source code (.zip) or clone from the git-repo.
 
-> NOTE: If you have problem downloading the source, please drop mail to nadgowdas@in.ibm.com
 
 ```bash
 $ cd cargo/server
