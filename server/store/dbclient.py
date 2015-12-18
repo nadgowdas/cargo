@@ -1,5 +1,5 @@
 #
-#Copyright IBM Corporation 2015. 
+#Copyright IBM Corporation 2015.
 #LICENSE: Apache License 2.0 http://opensource.org/licenses/Apache-2.0
 
 """
