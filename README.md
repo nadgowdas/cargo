@@ -67,6 +67,8 @@ For example:
 $ python apiserver.py
 ```
 
+Currently, it will not go deamon. It will print logs to the terminal
+
 Installing agent:
 ----------------------------
 Follow this instructions to install agent on every docker host
@@ -126,4 +128,5 @@ For example
 $ python agent.py
 ```
 
+Currently, it will not go deamon. It will print logs to the terminal
 
