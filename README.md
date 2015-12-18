@@ -1,4 +1,4 @@
-Cargo - Container Migration Solution
+Cargo - Container Storage Migration Solution
 ======================================
 Cargo is a system that we have developed at IBM Research to migrate containers along with their data with minimal downtime. Cargo leverages data federation capabilities of union filesystem to create a unified view of data (mainly the root file system) across the source and target hosts. This allows Cargo to start up a container almost immediately (within milliseconds)  on the target host as the data from source root file system gets copied to target hosts either on-demand (using a copy-on-write (COW) partition)  or lazily in the background (using rsync). 
 
@@ -30,6 +30,12 @@ $ pip install Flask flask-restful
 Cargo server uses `etcd` for storing the migration metadata. You can either download and install `etcd` on the server or 
 you can simply instantiate a new etcd container.
 
+```bash
+$ docker  pull gcr.io/google_containers/etcd:2.0.12
+$ docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd --addr=127.0.0.1:4001
+--bind-addr=0.0.0.0:4001 --data-dir=/var/etcd/data
+
+```
 3) etcd python client
 
 ```bash
