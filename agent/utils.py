@@ -14,29 +14,24 @@ CONFIG_DIR = "/var/lib/cargo"
 SVC_TEMPLATE = "replicator_svc.conf"
 ETC_INIT_DIR = "/etc/init/"
 
+def getDir(service, container, volcnt):
+    fmt = "{CARGO_HOME}/{SERVICE}_{CONTAINER}_{CNT}"
+    path = fmt.format(CARGO_HOME = CONFIG_DIR, SERVICE = service, CONTAINER = container, CNT = volcnt)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
+
 def getNFSMountDir(container, volcnt):
-    path = "{CARGO_HOME}/nfs_{CONTAINER}_{CNT}".format(CARGO_HOME = CONFIG_DIR, CONTAINER = container, CNT = volcnt)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
+    return getDir("nfs", container, volcnt)
 
-def getCOWDir(container, volcnt):    
-    path = "{CARGO_HOME}/cow_{CONTAINER}_{CNT}".format(CARGO_HOME = CONFIG_DIR, CONTAINER = container, CNT = volcnt)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
+def getCOWDir(container, volcnt):
+    return getDir("cow", container, volcnt)
 
-def getUnionMountDir(container, volcnt):    
-    path = "{CARGO_HOME}/union_{CONTAINER}_{CNT}".format(CARGO_HOME = CONFIG_DIR, CONTAINER = container, CNT = volcnt)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
+def getUnionMountDir(container, volcnt):
+    return getDir("union", container, volcnt)
 
-def getLazyCopyDir(container, volcnt):    
-    path = "{CARGO_HOME}/lzcopy_{CONTAINER}_{CNT}".format(CARGO_HOME = CONFIG_DIR, CONTAINER = container, CNT = volcnt)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
+def getLazyCopyDir(container, volcnt):
+    return getDir("lzcopy", container, volcnt)
 
 def getContainerMDFile(container):
     mdfilepath = "{CARGO_HOME}/{CONTAINER}.md".format(CARGO_HOME = CONFIG_DIR, CONTAINER = container)
@@ -63,10 +58,7 @@ def storeReplProcID(container, volumeId, procId):
 
 def findAndReplace(infile, searchExp, replaceExp):
     for line in fileinput.input(infile, inplace = 1):
-        if searchExp in line:
-            line = line.replace(searchExp,replaceExp)
-
-        sys.stdout.write(line)
+        sys.stdout.write(line.replace(searchExp, replaceExp))
 
 def createReplSvc(container, volumeId, cmd):
     svcName = "{CONTAINER}-{VOLUMEID}".format(CONTAINER = container, VOLUMEID = volumeId)
