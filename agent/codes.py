@@ -40,7 +40,7 @@ def herror(rc):
         corresponding HTTP status code
         
     """
-    if rc == SUCCESS or rc == IGNORE_MSG or rc == DUP_REQUEST:
+    if rc in (SUCCESS, IGNORE_MSG, DUP_REQUEST):
         return HTTP_SUCCESS 
     if rc == NOT_FOUND:
         return HTTP_NOT_FOUND
